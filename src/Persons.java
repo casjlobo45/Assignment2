@@ -14,20 +14,15 @@
 public class Persons {
 	private String personCode;
 	private String name;
-	private String address;
+	private Address address;
 	private String emailAddress;
 	
 	//Constructor for Persons
-	public Persons(String personCode,
-			String name,
-			String address,
-			String emailAdress){
-		
+	public Persons(String personCode, String name, Address address, String emailAdress){
 		this.personCode = personCode;
 		this.name = name;
 		this.address = address;
-		this.emailAddress = emailAddress;
-			
+		this.emailAddress = emailAddress;	
 	}
 	
 	
@@ -40,19 +35,19 @@ public class Persons {
 		this.personCode = personCode;
 	}
 
-	public String getName() {
+	public String getString() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setString(String name) {
 		this.name = name;
 	}
 
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
@@ -64,5 +59,9 @@ public class Persons {
 		this.emailAddress = emailAddress;
 	}
 
+	
+	
+	
+	
 	
 }
