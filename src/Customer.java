@@ -1,17 +1,12 @@
 
-public class CustomerStruct {
-	
+public class Customer {
 	private String customerCode;
 	private String type;
 	private String primaryContact;
 	private String name;
-	private String address;
+	private Address address;
 		
-	public CustomerStruct(String customerCode,
-		String type,
-		String primaryContact,
-		String name,
-		String address){
+	public Customer(String customerCode, String type, String primaryContact, String name, Address address){
 		
 		this.customerCode = customerCode;
 		this.type = type;
@@ -53,12 +48,12 @@ public class CustomerStruct {
 		this.name = name;
 	}
 
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
-		
-}	
+	
+}
