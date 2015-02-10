@@ -1,0 +1,78 @@
+<unl.cse.project.Customer>
+  <customerCode>C001</customerCode>
+  <type>M</type>
+  <primaryContact>231</primaryContact>
+  <name>Cinco Consultants</name>
+  <address>
+    <street>259 Concorde Suites</street>
+    <city>Lincoln</city>
+    <state>NE</state>
+    <zipcode>68588-0115</zipcode>
+    <country>USA</country>
+  </address>
+</unl.cse.project.Customer>
+<unl.cse.project.Customer>
+  <customerCode>C002</customerCode>
+  <type>A</type>
+  <primaryContact>944c</primaryContact>
+  <name>Stark Associates</name>
+  <address>
+    <street>184 Marvel Way</street>
+    <city>New York</city>
+    <state>NY</state>
+    <zipcode>10453</zipcode>
+    <country>USA</country>
+  </address>
+</unl.cse.project.Customer>
+<unl.cse.project.Customer>
+  <customerCode>C003</customerCode>
+  <type>M</type>
+  <primaryContact>306a</primaryContact>
+  <name>Venture Club</name>
+  <address>
+    <street>123 Venture Way</street>
+    <city>Culver City</city>
+    <state>CA</state>
+    <zipcode>90230</zipcode>
+    <country>USA</country>
+  </address>
+</unl.cse.project.Customer>
+<unl.cse.project.Customer>
+  <customerCode>C004</customerCode>
+  <type>N</type>
+  <primaryContact>321f</primaryContact>
+  <name>Mr Steve Odelay</name>
+  <address>
+    <street>9800 Savage Rd</street>
+    <city>Fort Meade</city>
+    <state>MD</state>
+    <zipcode>20755</zipcode>
+    <country>USA</country>
+  </address>
+</unl.cse.project.Customer>
+<unl.cse.project.Customer>
+  <customerCode>C005</customerCode>
+  <type>N</type>
+  <primaryContact>bbchar</primaryContact>
+  <name>Vandelay Industries</name>
+  <address>
+    <street>1060 West Addison</street>
+    <city>Chicago</city>
+    <state>IL</state>
+    <zipcode>60601</zipcode>
+    <country>USA</country>
+  </address>
+</unl.cse.project.Customer>
+<unl.cse.project.Customer>
+  <customerCode>C006</customerCode>
+  <type>A</type>
+  <primaryContact>321dr</primaryContact>
+  <name>Mr Gregory Smith</name>
+  <address>
+    <street>456 West 7th St.</street>
+    <city>Omaha</city>
+    <state>NE</state>
+    <zipcode>68500</zipcode>
+    <country>USA</country>
+  </address>
+</unl.cse.project.Customer>
