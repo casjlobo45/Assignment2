@@ -10,15 +10,16 @@
  * This class is the constructor for the venues object.
  */
 
+
 public class Venues {
 	//Variables for Venues:
 	private String venueCode;
 	private String name;
-	private String address;
-	private int capactiy;
+	private Address address;
+	private String capacity;
 	
 	//Constructor for Venues:
-	public Venues(String venueCode, String name, String address, int capacity){
+	public Venues(String venueCode, String name, Address address, String capacity){
 		this.venueCode = venueCode;
 		this.name = name;
 		this.address = address;
@@ -38,34 +39,38 @@ public class Venues {
 	}
 
 
-	public String getName() {
+	public String getString() {
 		return name;
 	}
 
 
-	public void setName(String name) {
+	public void setString(String name) {
 		this.name = name;
 	}
 
 
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
 
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
 
-	public int getCapactiy() {
-		return capactiy;
+	public String getCapacity() {
+		return capacity;
 	}
 
 
-	public void setCapactiy(int capactiy) {
-		this.capactiy = capactiy;
+	public void setCapactiy(String capacity) {
+		this.capacity = capacity;
 	}
+	
+	
+	
+	
 	
 	
 }
