@@ -23,6 +23,7 @@ import com.thoughtworks.xstream.*;
 
 
 public class DataConverter {
+	
 	public static void main(String[] args) {
 		
 		
@@ -39,7 +40,7 @@ public class DataConverter {
 		
 		//Create a new customer array---the size is the first line which has the number of records in the file
 		Customer Customers[] = new Customer[s.nextInt()];
-
+		s.nextLine();
 		//Read in and process the data file, create customers and add them to the array
 		//Reading in the customer file
 		int i = 0;
@@ -47,16 +48,15 @@ public class DataConverter {
 			//Store the next line in a string
 			String line = s.nextLine();
 			//split the string with the delimiter ";" into a string array
-			String tokens[] = line.split(";");
+			String[] tokens = line.split(";");
 			//The string is now split along the delimiter
 			String customerCode = tokens[0];
 			String type = tokens[1];
 			String primaryContact = tokens[2];
-			String name[] = tokens[3].split(",");
-			Name customerName = new Name(name[1], name[0]);
+			String name = tokens[3];
 			String address[] = tokens[4].split(",");
 			Address customerAddress = new Address(address[0], address[1], address[2], address[3], address[4]);
-			Customer t = new Customer(customerCode, type, primaryContact, customerName, customerAddress);
+			Customer t = new Customer(customerCode, type, primaryContact, name, customerAddress);
 			Customers[i] = t;
 			i++;
 		}
