@@ -82,7 +82,7 @@ public class DataConverter {
 			String csout = xstream.toXML(cs);
 
 			try {
-				writer.write(cs+"\n");
+				writer.write(csout+"\n");
 			} catch (IOException e) {
 				e.printStackTrace();;
 			}
