@@ -13,7 +13,6 @@
 
 public class Product {
 
-	//variables for Game-Tickets , season-passes, parking-passes, psl's, refreshments
 	protected static String productCode;
 	protected static String productType;
 
