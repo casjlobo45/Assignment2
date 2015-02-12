@@ -13,16 +13,16 @@
 
 public class Persons {
 	private String personCode;
-	private String name;
+	private Name name;
 	private Address address;
-	private String emailAddress;
+	private String[] email;
 	
 	//Constructor for Persons
-	public Persons(String personCode, String name, Address address, String emailAdress){
+	public Persons(String personCode, Name name, Address address, String[] email){
 		this.personCode = personCode;
 		this.name = name;
 		this.address = address;
-		this.emailAddress = emailAddress;	
+		this.email = email;	
 	}
 	
 	
@@ -35,11 +35,11 @@ public class Persons {
 		this.personCode = personCode;
 	}
 
-	public String getString() {
+	public Name getString() {
 		return name;
 	}
 
-	public void setString(String name) {
+	public void setString(Name name) {
 		this.name = name;
 	}
 
@@ -51,12 +51,12 @@ public class Persons {
 		this.address = address;
 	}
 
-	public String getEmailAddress() {
-		return emailAddress;
+	public String[] getEmail() {
+		return email;
 	}
 
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
+	public void setEmail(String[] email) {
+		this.email = email;
 	}
 
 	
