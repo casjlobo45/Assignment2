@@ -39,7 +39,7 @@ public class Venues {
 	}
 
 
-	public String getString() {
+	public String getName() {
 		return name;
 	}
 
