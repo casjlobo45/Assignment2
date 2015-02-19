@@ -1,3 +1,5 @@
+package unl.cse.project;
+
 
 import java.util.Scanner;
 import java.io.File;
@@ -25,8 +27,78 @@ public class DataConverter {
 	public static void main(String[] args) {
 		
 		
+		//New scanner that reads in the Persons data file
+		String fileName = "data/Persons.dat";
+		Scanner t = null;
+		try {
+			t = new Scanner(new File(fileName));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		//Create a new Persons array--the size is the first line which has the number of records in the file
+		
+		Persons Persons[] = new Persons[t.nextInt()];
+		t.nextLine();
+		//Read in and process the data file, create persons and add them to the array
+		//Reading in the customer file
+		int i = 0;
+		while(t.hasNext()){
+			//Store the next line in a string
+			String line = t.nextLine();
+			//split the string with the delimiter ";" into a string array
+			String[] tokens = line.split(";");
+			//The string is now split along the delimiter
+			String personCode = tokens[0];
+			String[] personName = tokens[1].split(",");
+			Name name = new Name(personName[1], personName[0]);
+			//Split the address along the delimiter and create a new address object
+			String[] address = tokens[2].split(",");
+			Address personAddress = new Address(address[0], address[1], address[2], address[3], address[4]);
+			//*******************Error*************************************//
+			//*****************There can be 0 e-mails, 1 or more*************//
+			String[] email = null;
+			if(tokens.length > 3){
+				email = tokens[3].split(",");
+			}
+			Persons newPerson = new Persons(personCode, name, personAddress, email);
+			Persons[i] = newPerson;
+			i++;
+		}		
+		
+		//Converting array to xml file
+		File xmlOut2 = new File("data/Persons.xml");
+		XStream xstream = new XStream();
+		
+		FileWriter writer2 = null;
+
+		try { 
+			writer2 = new FileWriter(xmlOut2); 
+		} 
+		catch (IOException e) { 
+			e.printStackTrace();
+
+		}
+
+		//For loop that goes through the array of persons converting it to xml
+		for(Persons p : Persons) { 
+			String pOut = xstream.toXML(p);
+
+			try {
+				writer2.write(pOut+"\n");
+			} catch (IOException e) {
+				e.printStackTrace();;
+			}
+			
+			} try {
+				writer2.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}		
+			
+		
 		//Create a scanner to read in the file
-		String fileName = "data/Customers.dat";
+		fileName = "data/Customers.dat";
 		Scanner s = null;
 		
 		try {
@@ -41,7 +113,7 @@ public class DataConverter {
 		s.nextLine();
 		//Read in and process the data file, create customers and add them to the array
 		//Reading in the customer file
-		int i = 0;
+		i = 0;
 		while(s.hasNext()){
 			//Store the next line in a string
 			String line = s.nextLine();
@@ -51,11 +123,20 @@ public class DataConverter {
 			String customerCode = tokens[0];
 			String type = tokens[1];
 			String primaryContact = tokens[2];
+			
+			Persons person= null;
+			int j = 0;
+			while(j<Persons.length){
+				if(Persons[j].getPersonCode().contains(primaryContact)){
+					person = Persons[j];
+				}
+				j++;
+			}
 			String name = tokens[3];
 			//Split the address along the delimiter and create a new address object
 			String[] address = tokens[4].split(",");
 			Address customerAddress = new Address(address[0], address[1], address[2], address[3], address[4]);
-			Customer newCustomer = new Customer(customerCode, type, primaryContact, name, customerAddress);
+			Customer newCustomer = new Customer(customerCode, type, person, name, customerAddress);
 			Customers[i] = newCustomer;
 			i++;
 		}
@@ -66,7 +147,7 @@ public class DataConverter {
 
 		FileWriter writer = null;
 
-		XStream xstream = new XStream();
+		
 
 		try { 
 			writer = new FileWriter(xmlOut); 
@@ -95,73 +176,75 @@ public class DataConverter {
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//New scanner that reads in the Persons data file
-		fileName = "data/Persons.dat";
-		Scanner t = null;
-		try {
-			t = new Scanner(new File(fileName));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		//Create a new Persons array--the size is the first line which has the number of records in the file
-		Persons Persons[] = new Persons[t.nextInt()];
-		t.nextLine();
-		//Read in and process the data file, create persons and add them to the array
-		//Reading in the customer file
-		i = 0;
-		while(t.hasNext()){
-			//Store the next line in a string
-			String line = t.nextLine();
-			//split the string with the delimiter ";" into a string array
-			String[] tokens = line.split(";");
-			//The string is now split along the delimiter
-			String personCode = tokens[0];
-			String[] personName = tokens[1].split(",");
-			Name name = new Name(personName[1], personName[0]);
-			//Split the address along the delimiter and create a new address object
-			String[] address = tokens[2].split(",");
-			Address personAddress = new Address(address[0], address[1], address[2], address[3], address[4]);
-			//*******************Error*************************************//
-			//*****************There can be 0 e-mails, 1 or more*************//
-			String[] email = null;
-			if(tokens.length > 3){
-				email = tokens[3].split(",");
-			}
-			Persons newPerson = new Persons(personCode, name, personAddress, email);
-			Persons[i] = newPerson;
-			i++;
-		}		
-		
-		//Converting array to xml file
-		File xmlOut2 = new File("data/Persons.xml");
 
-		FileWriter writer2 = null;
-		XStream xstream2 = new XStream();
-
-		try { 
-			writer2 = new FileWriter(xmlOut2); 
-		} 
-		catch (IOException e) { 
-			e.printStackTrace();
-
-		}
-
-		//For loop that goes through the array of persons converting it to xml
-		for(Persons p : Persons) { 
-			String pOut = xstream.toXML(p);
-
+			//Create a scanner to read in the file
+			fileName = "data/Venues.dat";
+			Scanner q = null;
+			
 			try {
-				writer2.write(pOut+"\n");
-			} catch (IOException e) {
-				e.printStackTrace();;
+				q = new Scanner(new File(fileName));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
 			}
 			
-			} try {
-				writer2.close();
-			} catch (IOException e) {
+			
+			//Create a new customer array---the size is the first line which has the number of records in the file
+			Venues Venues[] = new Venues[q.nextInt()];
+			q.nextLine();
+			//Read in and process the data file, create customers and add them to the array
+			//Reading in the customer file
+			i = 0;
+			while(q.hasNext()){
+				//Store the next line in a string
+				String line = q.nextLine();
+				//split the string with the delimiter ";" into a string array
+				String[] tokens = line.split(";");
+				//The string is now split along the delimiter
+				String venueCode = tokens[0];
+				String name = tokens[1];
+				//Split the address along the delimiter and create a new address object
+				String[] address = tokens[2].split(",");
+				Address venueAddress = new Address(address[0], address[1], address[2], address[3], address[4]);
+				String capacity = tokens[3];
+				Venues newVenue = new Venues(venueCode, name, venueAddress, capacity);
+				Venues[i] = newVenue;
+				i++;
+			}
+			
+			
+			//Converting array to xml file
+			File xmlOut4 = new File("data/Venues.xml");
+
+			FileWriter writer4 = null;
+
+			
+
+			try { 
+				writer4 = new FileWriter(xmlOut4); 
+			} 
+			catch (IOException e) { 
 				e.printStackTrace();
-			}		
+
+			}
+
+			//For loop that goes through the array of customers converting it to xml
+			for(Venues vs : Venues) { 
+				String vsout = xstream.toXML(vs);
+
+				try {
+					writer4.write(vsout+"\n");
+				} catch (IOException e) {
+					e.printStackTrace();;
+				}
+		
+				} try {
+					writer4.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		
+		
+	
 		
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -193,17 +276,33 @@ public class DataConverter {
 				//The string is now split along the delimiter
 				String productCode = tokens[0];
 				String productType = tokens[1];
+			
 				if(productType.equals("TG")){//game ticket
+					
 					String venueCode = tokens[2];
+					
+					Venues venue2 = null;
+					
+					int j = 0;
+					while(j<Venues.length){
+						if(Venues[j].getVenueCode().contains(venueCode)){
+							venue2 =Venues[j];
+						}
+						j++;
+					}
 					
 					String dateTime = tokens[3];
 					String team1 = tokens[4];
 					String team2 = tokens[5];
 					double pricePerUnit = Double.parseDouble(tokens[6]);
-	////////Venues venue = new Venues(venueCode, unl.cse.project.Venues.getName(), unl.cse.project.Venues.getAddress(), unl.cse.project.Venues.getCapacity());
-					//Product newProduct = new GameTicket(productCode, productType, venue, dateTime, team1, team2, pricePerUnit);
-					//ProductArray[i] = newProduct;
-
+					
+					if(venue2 != null){
+					Product newProduct = new GameTicket(productCode, productType, venue2, dateTime, team1, team2, pricePerUnit);
+					ProductArray[i] = newProduct;
+					}else{
+						Product newProduct = new GameTicket(productCode, productType, null, dateTime, team1, team2, pricePerUnit);
+						ProductArray[i] = newProduct;
+					}
 				}
 				else if(productType.equals("TS")){//season pass
 					String team = tokens[2];
@@ -215,12 +314,21 @@ public class DataConverter {
 
 				}
 				else if(productType.equals("SP")){//parking pass
+					
 					String venueCode = tokens[2];
+					
+					Venues venue2= null;
+					int j = 0;
+					while(j<Venues.length){
+						if(Venues[j].getVenueCode().contains(venueCode)){
+							venue2 = Venues[j];
+						}
+						j++;
+					}
+									
 					double hourlyFee = Double.parseDouble(tokens[3]);
-					//Venues venue = new Venues(venueCode, unl.cse.project.Venues.getName(), unl.cse.project.Venues.getAddress(), unl.cse.project.Venues.getCapacity());
-					//Product newProduct = new ParkingPass(productCode, productType, venue, hourlyFee);
-					//ProductArray[i] = newProduct;
-				}
+					Product newProduct = new ParkingPass(productCode, productType, venue2, hourlyFee);
+					ProductArray[i] = newProduct;				}
 				else if(productType.equals("SL")){//psl
 					String ticketCode = tokens[2];
 					double licenseFee = Double.parseDouble(tokens[3]);
@@ -241,7 +349,7 @@ public class DataConverter {
 			File xmlOut3 = new File("data/Products.xml");
 
 			FileWriter writer3 = null;
-			XStream xstream3 = new XStream();
+			
 
 			try { 
 				writer3 = new FileWriter(xmlOut3); 
@@ -278,73 +386,6 @@ public class DataConverter {
 		
 				
 				
-				//Create a scanner to read in the file
-				fileName = "data/Venues.dat";
-				Scanner q = null;
-				
-				try {
-					q = new Scanner(new File(fileName));
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				
-				
-				//Create a new customer array---the size is the first line which has the number of records in the file
-				Venues Venues[] = new Venues[q.nextInt()];
-				q.nextLine();
-				//Read in and process the data file, create customers and add them to the array
-				//Reading in the customer file
-				i = 0;
-				while(q.hasNext()){
-					//Store the next line in a string
-					String line = q.nextLine();
-					//split the string with the delimiter ";" into a string array
-					String[] tokens = line.split(";");
-					//The string is now split along the delimiter
-					String venueCode = tokens[0];
-					String name = tokens[1];
-					//Split the address along the delimiter and create a new address object
-					String[] address = tokens[2].split(",");
-					Address venueAddress = new Address(address[0], address[1], address[2], address[3], address[4]);
-					String capacity = tokens[3];
-					Venues newVenue = new Venues(venueCode, name, venueAddress, capacity);
-					Venues[i] = newVenue;
-					i++;
-				}
-				
-				
-				//Converting array to xml file
-				File xmlOut4 = new File("data/Venues.xml");
-
-				FileWriter writer4 = null;
-
-				XStream xstream4 = new XStream();
-
-				try { 
-					writer4 = new FileWriter(xmlOut4); 
-				} 
-				catch (IOException e) { 
-					e.printStackTrace();
-
-				}
-
-				//For loop that goes through the array of customers converting it to xml
-				for(Venues vs : Venues) { 
-					String vsout = xstream.toXML(vs);
-
-					try {
-						writer4.write(vsout+"\n");
-					} catch (IOException e) {
-						e.printStackTrace();;
-					}
-			
-					} try {
-						writer4.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-			
-			
-		}	
+	}
 
 }
